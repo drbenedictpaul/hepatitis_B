@@ -50,22 +50,21 @@ CSV.write("X_clean.csv", X_clean_df)
 CSV.write("y_clean.csv", y_df)
 println("-> Successfully created 'X_clean.csv' and 'y_clean.csv'.")
 
-# --- Step 5: Training and Evaluating a Random Forest Model ---
+# --- Step 5: Training and Evaluating a Random Forest Model (WITH TUNING) ---
 println("\nStep 5: Training and evaluating the model...")
 RandomForestClassifier = @load RandomForestClassifier pkg=DecisionTree
-rf_model = RandomForestClassifier()
-cv = CV(nfolds=nrow(X_clean))
 
-# THIS IS THE FIX: We add `ordered=true` to satisfy the f1score metric.
-y_categorical = categorical(y, ordered=true)
+# THIS IS THE FIX: We set hyperparameters to help the model on a small dataset.
+rf_model = RandomForestClassifier(
+    min_samples_leaf=1,
+    n_subfeatures=-1,
+    sampling_fraction=0.7
+)
 
+cv = CV(nfolds=nrow(X_clean)); y_categorical = categorical(y, ordered=true)
 println("-> Evaluating model using cross-validation...")
-evaluation = evaluate(rf_model, X_clean, y_categorical,
-                      resampling=cv,
-                      measure=[accuracy, auc, f1score])
-
+evaluation = evaluate(rf_model, X_clean, y_categorical, resampling=cv, measure=[accuracy, auc, f1score])
 println("\n--- MODEL EVALUATION COMPLETE ---")
-println("Cross-validation results for the Random Forest model:")
 println(evaluation)
 
 # --- Step 6: Extract and Analyze Feature Importances ---
