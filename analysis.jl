@@ -67,3 +67,30 @@ evaluation = evaluate(rf_model, X_clean, y_categorical,
 println("\n--- MODEL EVALUATION COMPLETE ---")
 println("Cross-validation results for the Random Forest model:")
 println(evaluation)
+
+# --- Step 6: Extract and Analyze Feature Importances ---
+println("\nStep 6: Extracting Feature Importances (The Key Result)...")
+
+# Train a final model on all data for interpretation
+println("-> Training a final model on all data...")
+final_mach = machine(rf_model, X_clean, y_categorical)
+fit!(final_mach)
+
+# Get the feature importances from the trained machine
+importances = feature_importances(final_mach)
+
+# THIS IS THE FIX: We construct the DataFrame from the list of pairs.
+# This is a more robust way to handle the output.
+importance_df = DataFrame(
+    Feature = [pair[1] for pair in importances],
+    Importance = [pair[2] for pair in importances]
+)
+
+# Sort the DataFrame to see the most important features at the top.
+sort!(importance_df, :Importance, rev=true)
+
+
+# --- FINAL RESULT ---
+println("\n--- FEATURE IMPORTANCE RESULTS ---")
+println("The clinical factors ranked by their importance for predicting the outcome:")
+println(importance_df)
