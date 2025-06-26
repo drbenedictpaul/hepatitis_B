@@ -94,3 +94,10 @@ sort!(importance_df, :Importance, rev=true)
 println("\n--- FEATURE IMPORTANCE RESULTS ---")
 println("The clinical factors ranked by their importance for predicting the outcome:")
 println(importance_df)
+
+# --- Step 7: Saving the Feature Importance Table ---
+
+# Use the CSV.write function to save the DataFrame to a file
+CSV.write("feature_importances.csv", importance_df)
+
+println("\n-> Successfully saved the importance table to 'feature_importances.csv'.")
