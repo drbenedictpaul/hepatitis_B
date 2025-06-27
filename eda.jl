@@ -5,9 +5,9 @@ using DataFrames, CSV, Statistics, Plots, StatsPlots
 gr()
 
 # --- Part 1: Load Curated Data ---
-println("Step 1: Loading curated data for analysis...")
+# println("Step 1: Loading curated data for analysis...")
 df = CSV.read("curated_data.csv", DataFrame)
-println("-> Successfully loaded $(nrow(df)) patient records.")
+# println("-> Successfully loaded $(nrow(df)) patient records.")
 
 
 # --- Part 2: Descriptive Statistics ---
@@ -15,7 +15,7 @@ println("\nStep 2: Generating and saving descriptive statistics...")
 desc_stats = describe(df, :mean, :std, :median, :min, :max)
 CSV.write("descriptive_statistics.csv", desc_stats, transform=(col, val) -> something(val, ""))
 println("\n--- DESCRIPTIVE STATISTICS TABLE ---"); println(desc_stats)
-println("\n-> Successfully saved descriptive statistics to 'descriptive_statistics.csv'.")
+# println("\n-> Successfully saved descriptive statistics to 'descriptive_statistics.csv'.")
 
 
 # --- Part 3: Visualize Feature #1 (ALT) ---
