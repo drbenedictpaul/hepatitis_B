@@ -1,7 +1,7 @@
 # A Data-Driven Framework for Predicting Chronic Hepatitis B through Feature Prioritization from a Sparse Clinical Dataset
 
 ![Language](https://img.shields.io/badge/Language-Julia-9558B2?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)
+
 
 ## Overview
 
@@ -110,11 +110,12 @@ The analysis is divided into three main scripts. They should be run in the follo
 ├── README.md
 ├── Project.toml
 ├── Manifest.toml
-└── (Generated PNG and CSV files will appear here)
+
 
 
 ## Citation
-Manuscript in communication
+Manuscript in communication.
+
 If you use this work, please cite the upcoming publication:
 > *(Author(s)). (Year). "A Data-Driven Framework for Predicting Chronic Hepatitis B through Feature Prioritization from a Sparse Clinical Dataset". *
 
