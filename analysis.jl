@@ -1,6 +1,5 @@
 # Load necessary packages
 using DataFrames, CSV, Statistics, MLJ, CategoricalArrays, ScientificTypes, XGBoost, MLJXGBoostInterface
-
 # --- Part 1: Data Loading and Column Name Cleaning ---
 println("Step 1: Loading data and cleaning column names...")
 df = CSV.read("AHB_data.csv", DataFrame)
@@ -24,6 +23,11 @@ for r in eachrow(df)
 end
 final_df = dropmissing(df, :Outcome)
 println("-> Found $(nrow(final_df)) patients with known outcomes.")
+
+# This is in analysis.jl
+# Save this curated DataFrame so we can use it for EDA in a separate file
+CSV.write("curated_data.csv", final_df)
+println("-> Saved curated data for EDA to 'curated_data.csv'.")
 
 # --- Part 3: Separating Features (X) and Target (y) ---
 println("\nStep 3: Separating features and target...")
